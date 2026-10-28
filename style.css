@@ -1,14 +1,15 @@
 body{
     margin:0;
     background:#f2f2f7;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC",sans-serif;
+    color:#1d1d1f;
 }
 
 .card{
     width:min(92%,520px);
     margin:30px auto;
     background:#fff;
-    border-radius:22px;
+    border-radius:24px;
     padding:24px;
     box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
@@ -19,14 +20,48 @@ h1{
     font-size:30px;
 }
 
-input,select{
+.summary{
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.summary-card{
+    flex:1;
+    background:#f7f8fc;
+    border-radius:18px;
+    padding:16px;
+    text-align:center;
+}
+
+.label{
+    color:#888;
+    font-size:13px;
+}
+
+.value{
+    margin-top:6px;
+    font-size:28px;
+    font-weight:700;
+    color:#007aff;
+}
+
+input,
+select{
     width:100%;
     box-sizing:border-box;
     padding:14px;
     margin-bottom:12px;
-    border:1px solid #ddd;
     border-radius:14px;
+    border:1px solid #ddd;
     font-size:16px;
+    background:white;
+}
+
+input:focus,
+select:focus{
+    outline:none;
+    border-color:#007aff;
 }
 
 button{
@@ -39,27 +74,20 @@ button:not(.editBtn):not(.deleteBtn){
     border:none;
     border-radius:14px;
     background:#007aff;
-    color:#fff;
+    color:white;
     font-size:17px;
     font-weight:600;
-}
-
-.total{
-    margin:22px 0;
-    text-align:center;
-    font-size:28px;
-    font-weight:bold;
-    color:#007aff;
+    margin-bottom:18px;
 }
 
 .item{
     display:flex;
     justify-content:space-between;
-    align-items:center;
-    padding:16px;
-    margin-top:12px;
-    background:#f9f9fb;
+    align-items:flex-start;
+    background:#f8f8fa;
     border-radius:18px;
+    padding:16px;
+    margin-bottom:12px;
 }
 
 .left{
@@ -78,8 +106,8 @@ button:not(.editBtn):not(.deleteBtn){
 
 .date{
     margin-top:6px;
-    color:#999;
     font-size:12px;
+    color:#999;
 }
 
 .right{
@@ -95,9 +123,9 @@ button:not(.editBtn):not(.deleteBtn){
 .editBtn,
 .deleteBtn{
     border:none;
-    color:white;
     border-radius:10px;
-    padding:6px 12px;
+    color:white;
+    padding:7px 12px;
     font-size:13px;
 }
 
