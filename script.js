@@ -4,18 +4,22 @@ let editingId = null;
 render();
 
 function saveExpense() {
+
     const amount = document.getElementById("amount").value.trim();
 
-    if (amount === "") return;
+    if (amount === "") {
+        alert("请输入金额");
+        return;
+    }
+
+    const old = expenses.find(e => e.id === editingId);
 
     const item = {
         id: editingId || Date.now(),
-        date: editingId
-            ? expenses.find(e => e.id === editingId)?.date || new Date().toISOString()
-            : new Date().toISOString(),
+        date: old ? old.date : new Date().toISOString(),
         category: document.getElementById("category").value,
         amount: Number(amount),
-        note: document.getElementById("note").value
+        note: document.getElementById("note").value.trim()
     };
 
     if (editingId) {
@@ -37,6 +41,7 @@ function saveExpense() {
 function render() {
 
     let total = 0;
+
     let html = "";
 
     expenses.forEach(e => {
@@ -53,14 +58,16 @@ function render() {
         <div class="note">${e.note || ""}</div>
 
         <div class="date">
-            ${e.date ? new Date(e.date).toLocaleString("zh-CN") : ""}
+            ${formatDate(e.date)}
         </div>
 
     </div>
 
     <div class="right">
 
-        <div class="money">¥${Number(e.amount).toFixed(2)}</div>
+        <div class="money">
+            ¥${Number(e.amount).toFixed(2)}
+        </div>
 
         <button class="editBtn"
             onclick="editExpense(${e.id})">
@@ -82,12 +89,15 @@ function render() {
     document.getElementById("list").innerHTML = html;
 
     document.getElementById("total").innerHTML =
-        "今日消费 ¥" + total.toFixed(2);
+        "¥" + total.toFixed(2);
+
+    document.getElementById("count").innerHTML =
+        expenses.length;
 }
 
 function deleteExpense(id) {
 
-    if (!confirm("确定删除这条记录？")) return;
+    if (!confirm("确定删除吗？")) return;
 
     expenses = expenses.filter(e => e.id !== id);
 
@@ -115,4 +125,20 @@ function editExpense(id) {
         top: 0,
         behavior: "smooth"
     });
+}
+
+function formatDate(dateString){
+
+    if(!dateString) return "";
+
+    const d = new Date(dateString);
+
+    return d.toLocaleString("zh-CN",{
+        year:"numeric",
+        month:"2-digit",
+        day:"2-digit",
+        hour:"2-digit",
+        minute:"2-digit"
+    });
+
 }
