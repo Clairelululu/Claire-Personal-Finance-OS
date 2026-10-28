@@ -40,13 +40,27 @@ function saveExpense() {
 
 function render() {
 
-    let total = 0;
-
+    let todayTotal = 0;
+    let monthTotal = 0;
     let html = "";
+
+    const now = new Date();
 
     expenses.forEach(e => {
 
-        total += Number(e.amount);
+        const amount = Number(e.amount);
+        const d = new Date(e.date);
+
+        if (
+            d.getFullYear() === now.getFullYear() &&
+            d.getMonth() === now.getMonth()
+        ) {
+            monthTotal += amount;
+
+            if (d.getDate() === now.getDate()) {
+                todayTotal += amount;
+            }
+        }
 
         html += `
 <div class="item">
@@ -66,7 +80,35 @@ function render() {
     <div class="right">
 
         <div class="money">
-            ¥${Number(e.amount).toFixed(2)}
+            ¥${amount.toFixed(2)}
+        </div>
+
+        <button class="editBtn"
+            onclick="editExpense(${e.id})">
+            编辑
+        </button>
+
+        <button class="deleteBtn"
+            onclick="deleteExpense(${e.id})">
+            删除
+        </button>
+
+    </div>
+
+</div>
+`;
+
+    });
+
+    document.getElementById("list").innerHTML = html;
+
+    document.getElementById("total").innerHTML =
+        "¥" + todayTotal.toFixed(2);
+
+    document.getElementById("monthTotal").innerHTML =
+        "¥" + monthTotal.toFixed(2);
+
+}
         </div>
 
         <button class="editBtn"
