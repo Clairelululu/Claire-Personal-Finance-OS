@@ -34,13 +34,30 @@ function render() {
 
         total += e.amount;
 
-        html += `
+html += `
 <div class="item">
-<div>
-<b>${e.category}</b><br>
-<small>${e.note}</small>
-</div>
-<div>¥${e.amount}</div>
+    <div>
+        <b>${e.category}</b><br>
+        <small>${e.note}</small>
+    </div>
+
+    <div style="text-align:right;">
+        <div>¥${e.amount}</div>
+
+        <button
+            onclick="deleteExpense(${e.id})"
+            style="
+                margin-top:6px;
+                border:none;
+                background:#ff3b30;
+                color:white;
+                border-radius:8px;
+                padding:4px 10px;
+                cursor:pointer;
+            ">
+            删除
+        </button>
+    </div>
 </div>
 `;
 
@@ -49,5 +66,17 @@ function render() {
     document.getElementById("list").innerHTML = html;
 
     document.getElementById("total").innerHTML = "今日消费 ¥" + total;
+
+}
+function deleteExpense(id){
+
+    expenses = expenses.filter(e => e.id !== id);
+
+    localStorage.setItem(
+        "expenses",
+        JSON.stringify(expenses)
+    );
+
+    render();
 
 }
