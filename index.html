@@ -1,51 +1,69 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claire OS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claire OS</title>
 
-  <style>
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC",sans-serif;
-      background:#f5f5f7;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-    }
+<style>
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+background:#f5f5f7;
+padding:20px;
+}
 
-    .card{
-      width:340px;
-      background:white;
-      border-radius:24px;
-      padding:30px;
-      box-shadow:0 10px 30px rgba(0,0,0,.08);
-      text-align:center;
-    }
+.card{
+max-width:420px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
 
-    h1{
-      margin:0;
-      font-size:34px;
-    }
+h1{
+text-align:center;
+}
 
-    p{
-      color:#666;
-      margin-top:10px;
-    }
+input,select{
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:15px;
+border-radius:12px;
+border:1px solid #ddd;
+font-size:16px;
+box-sizing:border-box;
+}
 
-    button{
-      margin-top:25px;
-      width:100%;
-      height:52px;
-      border:none;
-      border-radius:16px;
-      background:black;
-      color:white;
-      font-size:18px;
-    }
-  </style>
+button{
+width:100%;
+padding:15px;
+background:black;
+color:white;
+border:none;
+border-radius:14px;
+font-size:18px;
+}
+
+.item{
+background:#f7f7f7;
+padding:12px;
+border-radius:12px;
+margin-top:10px;
+display:flex;
+justify-content:space-between;
+}
+
+.total{
+font-size:22px;
+font-weight:bold;
+text-align:center;
+margin-top:20px;
+}
+</style>
+
 </head>
 
 <body>
@@ -54,13 +72,87 @@
 
 <h1>🍎 Claire OS</h1>
 
-<p>欢迎回来，Lin</p>
+<input id="amount" type="number" placeholder="金额">
 
-<button>
-开始记账
-</button>
+<select id="category">
+<option>☕ 咖啡</option>
+<option>🍜 餐饮</option>
+<option>🚗 交通</option>
+<option>👕 购物</option>
+<option>🏋️ 健身</option>
+<option>📚 学习</option>
+<option>🎁 其它</option>
+</select>
+
+<input id="note" placeholder="备注">
+
+<button onclick="saveExpense()">保存</button>
+
+<div class="total" id="total">
+今日消费 ¥0
+</div>
+
+<div id="list"></div>
 
 </div>
+
+<script>
+
+let expenses=JSON.parse(localStorage.getItem("expenses"))||[];
+
+render();
+
+function saveExpense(){
+
+const amount=document.getElementById("amount").value;
+
+if(amount=="") return;
+
+expenses.push({
+
+category:document.getElementById("category").value,
+
+amount:Number(amount),
+
+note:document.getElementById("note").value
+
+});
+
+localStorage.setItem("expenses",JSON.stringify(expenses));
+
+document.getElementById("amount").value="";
+document.getElementById("note").value="";
+
+render();
+
+}
+
+function render(){
+
+let total=0;
+
+let html="";
+
+expenses.forEach(e=>{
+
+total+=e.amount;
+
+html+=`
+<div class="item">
+<div>${e.category}<br><small>${e.note}</small></div>
+<div>¥${e.amount}</div>
+</div>
+`;
+
+});
+
+document.getElementById("list").innerHTML=html;
+
+document.getElementById("total").innerHTML="今日消费 ¥"+total;
+
+}
+
+</script>
 
 </body>
 </html>
