@@ -33,12 +33,14 @@ function render() {
     expenses.forEach(e => {
 
         total += e.amount;
-
 html += `
 <div class="item">
     <div>
         <b>${e.category}</b><br>
-        <small>${e.note}</small>
+        <small>${e.note}</small><br>
+        <small style="color:#888;">
+            ${e.date ? new Date(e.date).toLocaleString("zh-CN") : "旧记录"}
+        </small>
     </div>
 
     <div style="text-align:right;">
@@ -46,6 +48,21 @@ html += `
 
         <button
             onclick="deleteExpense(${e.id})"
+            style="
+                margin-top:6px;
+                border:none;
+                background:#ff3b30;
+                color:white;
+                border-radius:8px;
+                padding:4px 10px;
+                cursor:pointer;
+            ">
+            删除
+        </button>
+    </div>
+</div>
+`;
+
             style="
                 margin-top:6px;
                 border:none;
