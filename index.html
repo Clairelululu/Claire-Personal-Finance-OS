@@ -1,68 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Claire OS</title>
 
-<style>
-body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-background:#f5f5f7;
-padding:20px;
-}
-
-.card{
-max-width:420px;
-margin:auto;
-background:white;
-padding:25px;
-border-radius:20px;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
-}
-
-h1{
-text-align:center;
-}
-
-input,select{
-width:100%;
-padding:12px;
-margin-top:10px;
-margin-bottom:15px;
-border-radius:12px;
-border:1px solid #ddd;
-font-size:16px;
-box-sizing:border-box;
-}
-
-button{
-width:100%;
-padding:15px;
-background:black;
-color:white;
-border:none;
-border-radius:14px;
-font-size:18px;
-}
-
-.item{
-background:#f7f7f7;
-padding:12px;
-border-radius:12px;
-margin-top:10px;
-display:flex;
-justify-content:space-between;
-}
-
-.total{
-font-size:22px;
-font-weight:bold;
-text-align:center;
-margin-top:20px;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -72,25 +17,50 @@ margin-top:20px;
 
 <h1>🍎 Claire OS</h1>
 
-<input id="amount" type="number" placeholder="金额">
+<div class="summary">
+
+    <div class="summary-card">
+        <div class="label">💰 今日消费</div>
+        <div class="value" id="total">¥0.00</div>
+    </div>
+
+    <div class="summary-card">
+        <div class="label">📒 记录数</div>
+        <div class="value" id="count">0</div>
+    </div>
+
+</div>
+
+<input
+id="amount"
+type="number"
+placeholder="金额">
 
 <select id="category">
+
 <option>☕ 咖啡</option>
+
 <option>🍜 餐饮</option>
+
 <option>🚗 交通</option>
+
 <option>👕 购物</option>
+
 <option>🏋️ 健身</option>
+
 <option>📚 学习</option>
+
 <option>🎁 其它</option>
+
 </select>
 
-<input id="note" placeholder="备注">
+<input
+id="note"
+placeholder="备注">
 
-<button onclick="saveExpense()">保存</button>
-
-<div class="total" id="total">
-今日消费 ¥0
-</div>
+<button onclick="saveExpense()">
+保存消费
+</button>
 
 <div id="list"></div>
 
