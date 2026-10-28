@@ -1,1 +1,111 @@
+body{
+    margin:0;
+    background:#f2f2f7;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+}
 
+.card{
+    width:min(92%,520px);
+    margin:30px auto;
+    background:#fff;
+    border-radius:22px;
+    padding:24px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+h1{
+    text-align:center;
+    margin:0 0 20px;
+    font-size:30px;
+}
+
+input,select{
+    width:100%;
+    box-sizing:border-box;
+    padding:14px;
+    margin-bottom:12px;
+    border:1px solid #ddd;
+    border-radius:14px;
+    font-size:16px;
+}
+
+button{
+    cursor:pointer;
+}
+
+button:not(.editBtn):not(.deleteBtn){
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    background:#007aff;
+    color:#fff;
+    font-size:17px;
+    font-weight:600;
+}
+
+.total{
+    margin:22px 0;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    color:#007aff;
+}
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px;
+    margin-top:12px;
+    background:#f9f9fb;
+    border-radius:18px;
+}
+
+.left{
+    flex:1;
+}
+
+.title{
+    font-size:18px;
+    font-weight:600;
+}
+
+.note{
+    margin-top:6px;
+    color:#666;
+}
+
+.date{
+    margin-top:6px;
+    color:#999;
+    font-size:12px;
+}
+
+.right{
+    text-align:right;
+}
+
+.money{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.editBtn,
+.deleteBtn{
+    border:none;
+    color:white;
+    border-radius:10px;
+    padding:6px 12px;
+    font-size:13px;
+}
+
+.editBtn{
+    background:#007aff;
+    margin-right:6px;
+}
+
+.deleteBtn{
+    background:#ff3b30;
+}
