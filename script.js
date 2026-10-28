@@ -1,4 +1,4 @@
-<script>
+
 
 let expenses=JSON.parse(localStorage.getItem("expenses"))||[];
 
@@ -54,4 +54,3 @@ document.getElementById("total").innerHTML="今日消费 ¥"+total;
 
 }
 
-</script>
