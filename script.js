@@ -4,19 +4,13 @@ let expenses=JSON.parse(localStorage.getItem("expenses"))||[];
 
 render();
 
-function saveExpense(){
-
-const amount=document.getElementById("amount").value;
-
-if(amount=="") return;
-
 expenses.push({
-
-category:document.getElementById("category").value,
-
-amount:Number(amount),
-
-note:document.getElementById("note").value
+    id: Date.now(),
+    date: new Date().toISOString(),
+    category: document.getElementById("category").value,
+    amount: Number(amount),
+    note: document.getElementById("note").value
+});
 
 });
 
