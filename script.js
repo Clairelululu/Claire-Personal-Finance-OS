@@ -1,50 +1,53 @@
-
-
-let expenses=JSON.parse(localStorage.getItem("expenses"))||[];
+let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
 render();
 
-expenses.push({
-    id: Date.now(),
-    date: new Date().toISOString(),
-    category: document.getElementById("category").value,
-    amount: Number(amount),
-    note: document.getElementById("note").value
-});
+function saveExpense() {
 
-});
+    const amount = document.getElementById("amount").value;
 
-localStorage.setItem("expenses",JSON.stringify(expenses));
+    if (amount == "") return;
 
-document.getElementById("amount").value="";
-document.getElementById("note").value="";
+    expenses.push({
+        id: Date.now(),
+        date: new Date().toISOString(),
+        category: document.getElementById("category").value,
+        amount: Number(amount),
+        note: document.getElementById("note").value
+    });
 
-render();
+    localStorage.setItem("expenses", JSON.stringify(expenses));
 
+    document.getElementById("amount").value = "";
+    document.getElementById("note").value = "";
+
+    render();
 }
 
-function render(){
+function render() {
 
-let total=0;
+    let total = 0;
 
-let html="";
+    let html = "";
 
-expenses.forEach(e=>{
+    expenses.forEach(e => {
 
-total+=e.amount;
+        total += e.amount;
 
-html+=`
+        html += `
 <div class="item">
-<div>${e.category}<br><small>${e.note}</small></div>
+<div>
+<b>${e.category}</b><br>
+<small>${e.note}</small>
+</div>
 <div>¥${e.amount}</div>
 </div>
 `;
 
-});
+    });
 
-document.getElementById("list").innerHTML=html;
+    document.getElementById("list").innerHTML = html;
 
-document.getElementById("total").innerHTML="今日消费 ¥"+total;
+    document.getElementById("total").innerHTML = "今日消费 ¥" + total;
 
 }
-
